@@ -9,7 +9,7 @@ export default function Homepages() {
       <div className="flex flex-col gap-8 items-center">
         <div className="flex gap-0 justify-center items-center">
           <Image
-            isBlurred
+            isBlurred 
             width={500}
             src="https://i.giphy.com/L1R1tvI9svkIWwpVYr.webp"
             alt="NextUI Album Cover"
