@@ -1,27 +1,24 @@
 "use client";
 
 import { FlipWords } from "@/components/ui/flip-words";
-import { BackgroundBeams } from "@/components/ui/beam-background";
+import { WavyBackground } from "@/components/ui/wavy-background";
 
 export default function Homepages() {
   const words = ["Blog Post", "Showcase", "Project`s"];
   return (
     <>
-      <div className="h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
-        <div className="max-w-full mx-auto p-4">
-          <div className="h-screen flex justify-center items-center px-4">
-            <div
-              className="text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-600"
-              style={{ marginTop: -150 }}
-            >
-              Bécanee
-              <FlipWords words={words} /> <br />
-              in this websites
-            </div>
+      <WavyBackground className="max-w-4xl mx-auto pb-40">
+        <div className="h-screen flex justify-center items-center px-4">
+          <div
+            className="text-3xl mx-auto font-normal text-white dark:text-white"
+            style={{ marginTop: -150 }}
+          >
+            Bécanee
+            <FlipWords words={words} /> <br />
+            you can find in this websites
           </div>
         </div>
-        <BackgroundBeams />
-      </div>
+      </WavyBackground>
     </>
   );
 }

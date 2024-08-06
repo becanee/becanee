@@ -22,7 +22,7 @@ export default function NavbarComponent() {
     "Blog",
     "Showcase",
     "Projects",
-    "Log Out",
+    // "Log Out",
   ];
 
   return (
@@ -66,11 +66,8 @@ export default function NavbarComponent() {
             Sign in
           </Button>
         </NavbarItem>
-        {/* <NavbarItem>
-          <ThemeSwitcher />
-        </NavbarItem> */}
       </NavbarContent>
-      <ThemeSwitcher />
+      {/* <ThemeSwitcher /> */}
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>

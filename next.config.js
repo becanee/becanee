@@ -10,7 +10,7 @@ const nextConfig = {
           },
           {
             protocol: 'https',
-            hostname: 'assets.aceternity.com',
+            hostname: 'becanee.com',
             port: '',
             pathname: '/**',
           },

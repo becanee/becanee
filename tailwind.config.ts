@@ -1,10 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-
 const { nextui } = require("@nextui-org/react");
-// const svgToDataUri = require("mini-svg-data-uri");
-// const {
-//   default: flattenColorPalette,
-// } = require("tailwindcss/lib/util/flattenColorPalette");
+
+
+
+/** @type {import('tailwindcss').Config} */
 
 module.exports = {
   content: [
@@ -14,15 +12,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      animation: {
-        move: "move 5s linear infinite",
-      },
-      keyframes: {
-        move: {
-          "0%": { transform: "translateX(-200px)" },
-          "100%": { transform: "translateX(200px)" },
-        },
-      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -35,7 +24,6 @@ module.exports = {
   },
   darkMode: "class",
   plugins: [
-    nextui()
+    nextui(),
   ],
 };
-
