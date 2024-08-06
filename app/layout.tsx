@@ -1,4 +1,4 @@
-import { Source_Code_Pro } from 'next/font/google'
+import { Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavbarComponent from "@/components/layouts/Navbar";
@@ -14,9 +14,9 @@ export const metadata = {
 };
 
 const sourceCodePro = Source_Code_Pro({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -24,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={sourceCodePro.className}>
+    <html lang="id">
       <body className="bg-background text-foreground">
-        <main className="font-customFont min-h-screen flex flex-col items-center">
+        <main className="font-customFont min-h-screen items-center">
           <Providers>
             <NavbarComponent />
             {children}
