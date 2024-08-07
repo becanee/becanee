@@ -1,12 +1,12 @@
 "use client";
 import { cn } from "@/utils/utils";
-import { useTheme } from "next-themes";
 import React, { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
   children,
   className,
+  theme,
   containerClassName,
   colors,
   waveWidth,
@@ -18,6 +18,7 @@ export const WavyBackground = ({
 }: {
   children?: any;
   className?: string;
+  theme?: any;
   containerClassName?: string;
   colors?: string[];
   waveWidth?: number;
@@ -28,7 +29,6 @@ export const WavyBackground = ({
   [key: string]: any;
 }) => {
   const noise = createNoise3D();
-  const { theme } = useTheme();
 
 
   let w: number,

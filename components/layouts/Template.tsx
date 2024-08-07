@@ -34,7 +34,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
           exit={{ scaleX: 1, transition: { duration: 0.8, ease: "circIn" } }}
           transition={{ duration: 0.8, ease: [0.27, 0.94, 0.48, 1.0] }}
         >
-          // Completing page exit animation and load new page
           <FrozenRouter>{children}</FrozenRouter>
         </motion.div>
     </>
