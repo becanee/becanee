@@ -5,7 +5,7 @@ import { WavyBackground } from "@/components/ui/wavy-background";
 import { useTheme } from "next-themes";
 
 export default function Homepages() {
-  const words = ["Blog Post", "Showcase", "Project`s"];
+  const words = ["About", "Knowladge", "Showcase", "Works"];
   const { theme } = useTheme();
 
   return (
@@ -13,8 +13,11 @@ export default function Homepages() {
       <WavyBackground className="max-w-4xl mx-auto pb-40" theme={theme}>
         <div className="h-screen flex justify-center items-center px-4">
           <div
-            className="text-3xl mx-auto font-normal text-black dark:text-white"
-            style={{ marginTop: -150, color: theme === "dark" ? "white" : "black" }}
+            className="text-3xl mx-auto font-normal text-white light:text-black"
+            style={{
+              marginTop: -150,
+              color: theme === "dark" ? "white" : "black",
+            }}
           >
             Bécanee
             <FlipWords words={words} /> <br />

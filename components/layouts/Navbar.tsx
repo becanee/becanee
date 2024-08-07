@@ -18,22 +18,37 @@ export default function NavbarComponent() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
-    "Home",
-    "Blog",
-    "Showcase",
-    "Projects",
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "About",
+      path: "/about",
+    },
+    {
+      name: "Knowladge",
+      path: "/knowladge",
+    },
+    {
+      name: "Showcase",
+      path: "/",
+    },
+    {
+      name: "Works",
+      path: "/",
+    },
     // "Log Out",
   ];
 
   return (
-    <Navbar isBordered onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
           <p className="font-bold text-inherit">Bécanee</p>
         </NavbarBrand>
       </NavbarContent>
@@ -45,8 +60,13 @@ export default function NavbarComponent() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/blog" color="foreground">
-            Blog
+          <Link href="/about" color="foreground">
+            About
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/knowladge" color="foreground">
+            Knowladge
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -70,7 +90,10 @@ export default function NavbarComponent() {
       <ThemeSwitcher />
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem
+            key={`${item.name}-${index}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <Link
               color={
                 index === 0
@@ -80,10 +103,9 @@ export default function NavbarComponent() {
                   : "foreground"
               }
               className="w-full"
-              href="#"
-              // size="lg"
+              href={item.path}
             >
-              {item}
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}

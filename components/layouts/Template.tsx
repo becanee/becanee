@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { motion, useIsPresent } from "framer-motion";
+import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useContext, useRef } from "react";
+import { useTheme } from "next-themes";
 
 // Prevents instant page opening
 function FrozenRouter(props: { children: React.ReactNode }) {
@@ -20,7 +21,6 @@ function FrozenRouter(props: { children: React.ReactNode }) {
 
 export default function Template({ children }: { children: React.ReactNode }) {
   let pathname = usePathname();
-  const isPresent = useIsPresent();
 
   return (
     <>
