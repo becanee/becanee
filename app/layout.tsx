@@ -11,7 +11,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Becanee",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  description: "Fluctuat nec mergitur",
 };
 
 const sourceCodePro = Source_Code_Pro({
