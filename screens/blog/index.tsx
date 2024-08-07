@@ -1,9 +1,8 @@
 "use client";
 
-import { FlipWords } from "@/components/ui/flip-words";
 import { WavyBackground } from "@/components/ui/wavy-background";
 
-export default function Homepages() {
+export default function Blogpages() {
   const words = ["Blog Post", "Showcase", "Project`s"];
 
   return (
@@ -14,9 +13,7 @@ export default function Homepages() {
             className="text-3xl mx-auto font-normal text-white dark:text-white"
             style={{ marginTop: -150 }}
           >
-            Bécanee
-            <FlipWords words={words} /> <br />
-            you can find in this websites
+            Blog
           </div>
         </div>
       </WavyBackground>

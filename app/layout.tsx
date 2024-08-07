@@ -2,6 +2,7 @@ import { Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavbarComponent from "@/components/layouts/Navbar";
+import Template from "@/components/layouts/Template";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -24,12 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id">
+    <html lang="id" className={sourceCodePro.className}>
       <body className="bg-background text-foreground">
         <main className="font-customFont min-h-screen items-center">
           <Providers>
             <NavbarComponent />
-            {children}
+            <Template>{children}</Template>
           </Providers>
         </main>
       </body>

@@ -9,10 +9,10 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
 } from "@nextui-org/react";
 import ThemeSwitcher from "./ThemeSwitcher";
+import Link from "next/link";
 
 export default function NavbarComponent() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -40,12 +40,12 @@ export default function NavbarComponent() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="/" aria-current="page">
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="#" color="foreground">
+          <Link href="/blog" color="foreground">
             Blog
           </Link>
         </NavbarItem>
@@ -67,7 +67,7 @@ export default function NavbarComponent() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      {/* <ThemeSwitcher /> */}
+      <ThemeSwitcher />
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
@@ -81,7 +81,7 @@ export default function NavbarComponent() {
               }
               className="w-full"
               href="#"
-              size="lg"
+              // size="lg"
             >
               {item}
             </Link>
