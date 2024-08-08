@@ -15,9 +15,10 @@ export default function NotFoundComponent() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-2xl font-medium tracking-tight text-transparent md:text-5xl"
+        className="mt-1 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-xl font-medium tracking-tight text-transparent md:text-2xl"
       >
-        Not Found <br /> Could not find requested resource <br /><br />
+        Not Found <br /> Could not find requested resource <br />
+        <br />
         <Link href="/">Return Home</Link>
       </motion.h1>
     </LampContainer>
