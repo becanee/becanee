@@ -27,18 +27,17 @@ export default function NavbarComponent() {
       path: "/about",
     },
     {
-      name: "Knowladge",
-      path: "/knowladge",
+      name: "Journey",
+      path: "/",
     },
     {
-      name: "Showcase",
-      path: "/",
+      name: "Knowlwdge",
+      path: "/knowlwdge",
     },
     {
       name: "Works",
       path: "/",
     },
-    // "Log Out",
   ];
 
   return (
@@ -65,18 +64,18 @@ export default function NavbarComponent() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/knowladge" color="foreground">
-            Knowladge
+          <Link color="foreground" href="#">
+            Journey
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/knowledge" color="foreground">
+            Knowledge
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Showcase
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Projects
+            Works
           </Link>
         </NavbarItem>
       </NavbarContent>
