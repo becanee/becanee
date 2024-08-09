@@ -8,9 +8,6 @@ import { usePathname } from "next/navigation";
 
 export default function NotFoundComponent() {
   const pathname = usePathname()
-  console.log("🚀 ~ NotFoundComponent ~ pathname:", pathname)
-
-
   return (
     <LampContainer>
       <motion.h1
