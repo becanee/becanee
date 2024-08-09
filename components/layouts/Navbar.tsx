@@ -28,15 +28,15 @@ export default function NavbarComponent() {
     },
     {
       name: "Journey",
-      path: "/",
+      path: "/journey",
     },
     {
-      name: "Knowlwdge",
-      path: "/knowlwdge",
+      name: "Knowledge",
+      path: "/knowledge",
     },
     {
       name: "Works",
-      path: "/",
+      path: "/works",
     },
   ];
 
@@ -64,7 +64,7 @@ export default function NavbarComponent() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/journey">
             Journey
           </Link>
         </NavbarItem>
@@ -74,7 +74,7 @@ export default function NavbarComponent() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/Works">
             Works
           </Link>
         </NavbarItem>

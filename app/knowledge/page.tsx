@@ -1,10 +1,10 @@
 import Footer from "@/components/Footer";
-import Knowladgepages from "@/screens/knowladge";
+import Knowledgepages from "@/screens/knowledge";
 
 export default async function Index() {
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <Knowladgepages />
+      <Knowledgepages />
 
       <Footer />
     </div>

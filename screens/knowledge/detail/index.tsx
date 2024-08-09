@@ -1,15 +1,15 @@
 "use client";
 
 import HeroComponents from "@/components/HeroComponents";
-import KnowladgeDetail from "@/components/KnowladgeDetail";
+import KnowledgeDetail from "@/components/KnowledgeDetail";
 
-export default function KnowladgeDetailpages() {
+export default function KnowledgeDetailpages() {
 
   return (
     <>
       <HeroComponents title="" slug="Make things float in air" />
 
-      <KnowladgeDetail />
+      <KnowledgeDetail />
     </>
   );
 }
