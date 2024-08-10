@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { useEffect } from "react";
 
 export default function Homepages() {
-  const words = ["About", "Journey", "Knowladge", "Works"];
+  const words = ["About", "Journey", "Knowledge", "Works"];
   const { theme } = useTheme();
 
   useEffect(() => { }, [theme])

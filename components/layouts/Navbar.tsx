@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import ThemeSwitcher from "./ThemeSwitcher";
 import Link from "next/link";
+import LoginModal from "../auth/LoginModal";
 
 export default function NavbarComponent() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -74,14 +75,14 @@ export default function NavbarComponent() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/Works">
+          <Link color="foreground" href="/works">
             Works
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Button as={Link} color="primary" href="#" variant="flat" size="sm">
+          <Button as={Link} color="primary" href="/login" variant="flat" size="sm">
             Sign in
           </Button>
         </NavbarItem>

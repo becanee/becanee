@@ -5,6 +5,7 @@ import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
 import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import Footer from "@/components/Footer";
+import SidebarAuthenticated from "@/components/layouts/SidebarAuthenticated";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -12,13 +13,26 @@ export default async function ProtectedPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  
+  console.log("🚀 ~ ProtectedPage ~ user:", user)
 
   if (!user) {
     return redirect("/login");
   }
 
+  const signOut = async () => {
+    "use server";
+
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    return redirect("/");
+  };
+
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
+    <>
+      <SidebarAuthenticated handleLogout={signOut} />
+
+      {/* <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <div className="w-full">
         <div className="py-6 font-bold bg-purple-950 text-center">
           This is a protected page that you can only see as an authenticated
@@ -41,6 +55,7 @@ export default async function ProtectedPage() {
       </div>
 
       <Footer />
-    </div>
+    </div> */}
+    </>
   );
 }

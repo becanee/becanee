@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground">
         <main className="font-customFont min-h-screen items-center">
           <Providers>
-            <NavbarComponent />
+            {/* <NavbarComponent /> */}
             <Template>{children}</Template>
           </Providers>
         </main>
