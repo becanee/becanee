@@ -8,25 +8,35 @@ export const DATA = {
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
   description:
-    "I'm Bécanee as Freelancer turned Corporate Software Engineer. I love building things and helping people.",
+    "I'm Rama Aditya as Bécanee. Freelancer turned Corporate Software Engineer. I love building things from scratch and helping people better.",
   summary:
     // "At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Silicon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).",
-    `I'm Rama Aditya from Indonesia I have good professional and communication skills with experience focused on building very complex applications. My experience goes far beyond my educational path. \n\n
-⚡ I was involved in a lot of organizational work at private companies related to building tax and payroll, and finance applications as well as helping build many small applications for the community from scratch.`,
+    `I'm Rama Aditya from Indonesia I have good professional skills with experience focused on building very complex applications. My experience goes far beyond my educational path. \n\n
+⚡ I was involved in a lot of organizational work at private companies related to building tax and payroll also finance applications as well as helping build many small applications for the community from scratch.`,
   avatarUrl: "/me.jpg",
   skills: [
     "React.js",
     "Next.js",
-    "Typescript",
+    "Express.js",
     "Node.js",
+    "Javascript",
+    "Typescript",
     "Laravel",
     "PHP",
+    "UI Framework",
+    "Tailwind",
+    "Bootstrap",
     "Supabase",
     "Git",
+    "Adobe Photoshop",
+    "Adobe Premier",
+    "Canva",
+    "GPT Prompt",
+    "MS Office",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/blog", icon: NotebookIcon, label: "Notes" },
   ],
   contact: {
     email: "me@becanee.com",
@@ -137,6 +147,36 @@ export const DATA = {
       video: "",
     },
     {
+      title: "Online Order Apps",
+      href: "https://online-order-apps.vercel.app",
+      dates: "August 2024",
+      active: true,
+      description:
+        "Revolutionize your workflow with Online Tools—the Ultimate Toolkit for getting things done quickly! Dive into thousands of easy-to-use utilities for editing text, lists, and data, all without leaving your browser.",
+      technologies: [
+        "React.js",
+        "Express.js",
+        "Typescript",
+        "Supabase",
+        "TailwindCSS",
+        "Chakra UI",
+      ],
+      links: [
+        {
+          type: "Visit",
+          href: "https://online-order-apps.vercel.app",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Repository",
+          href: "https://github.com/becanee/Online-Order-Apps",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/works/becanee-online-order-apps.png",
+      video: "",
+    },
+    {
       title: "RestFull API",
       href: "https://api.becanee.com",
       dates: "April 2024",
@@ -154,7 +194,7 @@ export const DATA = {
       ],
       links: [
         {
-          type: "Website",
+          type: "Visit",
           href: "https://api.becanee.com",
           icon: <Icons.globe className="size-3" />,
         },
