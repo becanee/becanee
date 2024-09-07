@@ -5,8 +5,8 @@ export const DATA = {
   name: "Bécanee",
   initials: "Bé",
   url: "https://dillion.io",
-  location: "San Francisco, CA",
-  locationLink: "https://www.google.com/maps/place/sanfrancisco",
+  location: "Jakarta, ID",
+  locationLink: "https://www.google.com/maps/place/jakarta",
   description:
     "I'm Rama Aditya as Bécanee. Freelancer turned Corporate Software Engineer. I love building things from scratch and helping people better.",
   summary:
@@ -129,21 +129,31 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Work in progress",
-      href: "#!",
-      dates: "Coming soon",
+      title: "Stalker Apps",
+      href: "https://stalker-app.vercel.app",
+      dates: "Sept 2024",
       active: true,
-      description: "Something you don't thing before...",
+      description:
+        "Stalker App is a shady little app that lets you creep on people online. It's basically a digital spy tool that can track social media activity. But before you get too excited, they're not responsible for any trouble you get into. So use it wisely, or you might find yourself in a sticky situation.",
       technologies: [
+        "Next.js",
+        "Typescript",
+        "TailwindCSS",
+        "Shadcn UI",
       ],
       links: [
-        // {
-        //   type: "Website",
-        //   href: "https://api.becanee.com",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
+        {
+          type: "Visit",
+          href: "https://stalker-app.vercel.app",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Repository",
+          href: "https://github.com/becanee/stalker-apps",
+          icon: <Icons.github className="size-3" />,
+        },
       ],
-      image: "/works/soon.jpg",
+      image: "/works/becanee-stalker-app.png",
       video: "",
     },
     {
@@ -152,8 +162,9 @@ export const DATA = {
       dates: "August 2024",
       active: true,
       description:
-        "Revolutionize your workflow with Online Tools—the Ultimate Toolkit for getting things done quickly! Dive into thousands of easy-to-use utilities for editing text, lists, and data, all without leaving your browser.",
+        "An online ordering app for Micro, Small, and Medium Enterprises (MSMEs) is a digital platform specifically designed to help these businesses receive orders for products or services online. This app serves as a bridge between MSME business owners and consumers, simplifying the transaction process and expanding market reach.",
       technologies: [
+        "Vite.js",
         "React.js",
         "Express.js",
         "Typescript",
