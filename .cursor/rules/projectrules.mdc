@@ -1,0 +1,49 @@
+---
+alwaysApply: true
+---
+
+## Project Rules
+
+1. Folder Structure (Struktur Folder)
+- Tempatkan server component dan layout sidebar HANYA di `src/app/(secure)/**`. JANGAN letakkan client component di sini.
+- Simpan micro/custom component di `src/components/**`.
+- JANGAN ubah atau hapus file di `src/components/ui/**` (area shadcn/ui).
+- JANGAN ubah atau hapus file di `src/components/magicui/**` (area magicui).
+- Simpan SEMUA client component di `src/modules/**`.
+- Simpan helper/utility di `src/utils/**`.
+- Simpan SEMUA logic (dipakai server/client) di `src/hooks/**`.
+- Simpan SEMUA operasi CRUD database (Supabase) di `src/requests/**`.
+
+2. Code Writing Guidelines (Panduan Menulis Kode)
+- Tulis kode sesederhana mungkin.
+- Utamakan keterbacaan.
+- Hindari kode yang terlalu panjang.
+
+3. Agent Restrictions (Batasan Agent)
+- JANGAN melakukan improve/perubahan yang tidak diminta atau tidak relevan.
+- JANGAN menjalankan `npm run dev`.
+- JANGAN menjalankan `npm run build`.
+- JANGAN melakukan pengecekan TypeScript maupun ESLint.
+- JANGAN membuat atau mengubah file yang tidak relevan dengan permintaan.
+
+4. File Creation Rules (Aturan Membuat File)
+- Implementasikan CRUD database menggunakan Supabase di `src/requests/**`, lalu panggil dari `src/hooks/**`.
+- Buat server component di `src/app/(secure)/**`.
+- Buat client component di `src/modules/**`.
+- Pastikan SEMUA client dan server component bersih dari logic bisnis.
+- Letakkan SEMUA logic dan function di `src/hooks/**`.
+- Letakkan helper function di `src/utils/**`.
+- Tambahkan dokumentasi pada SETIAP function HANYA di `src/utils/**`, `src/hooks/**`, `src/requests/**` dengan format berikut:
+/**
+ * Func: deskripsi fungsi
+ * Created At: Minggu, 10 Agustus 2025
+ * Created By: becaneee.xyz
+ * @param 1 - deskripsi param 1
+ * @param 2 - deskripsi param 2
+ * dan seterusnya jika ada 
+*/
+
+5. Client Component Structure (Struktur Client Component)
+- Di setiap module, pecah komponen sesuai fungsinya: micro component dan main component.
+- Tetapkan main component dengan nama `index.tsx` (yang akan dipanggil di server component).
+- PENTING: Aturan ini HANYA berlaku di `src/modules/**`.
