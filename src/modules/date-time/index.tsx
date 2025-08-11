@@ -20,7 +20,7 @@ export default function DateTimeNow({ intervalMs = 60_000 }: { intervalMs?: numb
           onClick: () => window.open('https://n8n.becaneee.xyz', '_blank'),
         },
       })
-    }, 6000);
+    }, 7500);
   }, [])
   return <span className="text-xl font-bold tracking-tighter sm:text-xl xl:text-xl/none" >{now}</span>;
 }
