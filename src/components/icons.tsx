@@ -1,10 +1,11 @@
-import { IconSitemap } from "@tabler/icons-react";
+import { IconApi, IconSitemap } from "@tabler/icons-react";
 import { GlobeIcon, MailIcon } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
   n8n: (props: any) => <IconSitemap {...props} />,
+  restAPI: (props: any) => <IconApi {...props} />,
   globe: (props: IconProps) => <GlobeIcon {...props} />,
   email: (props: IconProps) => <MailIcon {...props} />,
   linkedin: (props: IconProps) => (

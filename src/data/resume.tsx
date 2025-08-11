@@ -85,6 +85,12 @@ export const DATA: any = {
         icon: Icons.n8n,
         navbar: true,
       },
+      restAPI: {
+        name: "Rest API",
+        url: "https://api.becaneee.xyz",
+        icon: Icons.restAPI,
+        navbar: true,
+      },
     },
   },
 
