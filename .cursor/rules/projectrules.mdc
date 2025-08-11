@@ -1,0 +1,61 @@
+## Project Rules
+
+### 1. Folder Structure
+**Server Components**: `src/app/(secure)/**` ONLY  
+**Client Components**: `src/modules/**` ONLY  
+**Business Logic**: `src/hooks/**` ONLY  
+**Database Operations**: `src/app/reqs/**` ONLY  
+**Utility Functions**: `src/utils/**` ONLY  
+**UI Components**: `src/components/**`  
+**PROTECTED**: `src/components/ui/**` - JANGAN UBAH
+
+### 2. Code Guidelines
+- Tulis kode SEDERHANA dan MUDAH DIBACA
+- Hindari kode yang BERLEBIHAN
+- Fokus pada FUNGSIONALITAS
+
+### 3. Agent Restrictions
+❌ JANGAN improve/perubahan yang TIDAK DIMINTA  
+❌ JANGAN jalankan `npm run dev` atau `npm run build`  
+❌ JANGAN cek TypeScript/ESLint  
+❌ JANGAN buat/ubah file yang TIDAK RELEVAN
+❌ JANGAN buat/ubah dokumentasi md/mdx
+
+### 4. File Creation
+**Database**: CRUD di `src/app/reqs/**`  
+**Logic**: Hooks di `src/hooks/**` yang panggil requests  
+**Components**: Server di `src/app/(secure)/**`, Client di `src/modules/**`  
+**Utils**: Helper functions di `src/utils/**`
+
+**Components harus BERSIH dari business logic**
+
+### 5. Documentation
+**WAJIB** untuk setiap function di `src/utils/**`, `src/hooks/**`, `src/app/reqs/**`:
+
+```typescript
+/**
+ * Func: [Deskripsi fungsi]
+ * Created At: [indonesian local timezone, format = dddd, MMMM Do YYYY, h:mm a]
+ * Created By: becaneee.xyz
+ * @param [param] - [deskripsi]
+ * @returns [deskripsi return jika ada]
+ */
+```
+
+### 6. Client Component Structure
+**Hanya di `src/modules/**`**:
+- **Main Component**: Nama file HARUS `index.tsx`
+- **Micro Components**: Komponen pendukung dengan nama deskriptif
+- Setiap module = 1 folder dengan `index.tsx` sebagai main component
+
+### 7. Implementation Flow
+1. **Database**: CRUD di `src/app/reqs/**`
+2. **Logic**: Hooks di `src/hooks/**`
+3. **Components**: UI di `src/modules/**` (client) atau `src/app/(secure)/**` (server)
+4. **Utils**: Helper functions di `src/utils/**` jika diperlukan
+
+### 8. Code Organization
+- **Components**: Hanya UI dan event handling
+- **Hooks**: Business logic dan state management
+- **Requests**: Database operations dan API calls
+- **Utils**: Pure functions dan helpers
