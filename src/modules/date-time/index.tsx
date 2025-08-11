@@ -9,7 +9,7 @@ export default function DateTimeNow({ intervalMs = 60_000 }: { intervalMs?: numb
 
   useEffect(() => {
     setTimeout(() => {
-      toast.info('Information', {
+      toast.info('Hello 👋', {
         description: 'ßécanee just uploaded new n8n templates',
         dismissible: true,
         closeButton: true,

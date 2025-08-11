@@ -198,6 +198,15 @@ export const DATA: any = {
       end: "",
     },
     {
+      school: "Hacktive8",
+      badge: "BATCH 45",
+      href: "https://www.hacktiv8.com",
+      degree: "React and React Native",
+      logoUrl: "/knowladges/hacktiv8.png",
+      start: "2021",
+      end: "",
+    },
+    {
       school: "Dumbways ID",
       badge: "BATCH 24",
       href: "https://dumbways.id",
