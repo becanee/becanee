@@ -237,25 +237,70 @@ export const DATA: any = {
 
   projects: [
     {
-      title: "Will Appear Soon",
+      title: "Tekno AI Subscription",
       href: "/",
-      dates: "2025 - Now",
+      dates: "⌛ work in progress",
       active: true,
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "Connect to premium service things together. Join this community of tech enthusiasts.",
       technologies: [
-        "Lorem Ipsum",
-        "Lorem Ipsum",
-        "Lorem Ipsum",
+        "Next.js",
+        "Supabase",
+        "Google Console",
+        "Whatsapp Gateway",
+        "n8n",
+      ],
+      links: [
+        // {
+        //   type: "Visit",
+        //   href: "/",
+        //   icon: <Icons.globe className="size-3" />,
+        // },
+      ],
+      image: "/project-tekno.png",
+      video: "",
+    },
+    {
+      title: "Public Rest API",
+      href: "/",
+      dates: "⌛ work in progress",
+      active: true,
+      description:
+        "Discover all available public rest api for your business needs.",
+      technologies: [
+        "Next.js",
+        "Supabase",
+        "SerpApi",
+      ],
+      links: [
+        // {
+        //   type: "Visit",
+        //   href: "/",
+        //   icon: <Icons.globe className="size-3" />,
+        // },
+      ],
+      image: "/project-api.png",
+      video: "",
+    },
+    {
+      title: "n8n Templates",
+      href: "https://n8n.becaneee.xyz",
+      dates: "June 2025",
+      active: true,
+      description:
+        "Discover n8n workflow templates for your business needs.",
+      technologies: [
+        "n8n",
+        "AI Agent",
       ],
       links: [
         {
-          type: "View",
-          href: "/",
+          type: "Visit",
+          href: "https://n8n.becaneee.xyz",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/soon.jpg",
+      image: "/project-n8n.png",
       video: "",
     },
     {
@@ -291,5 +336,5 @@ export const DATA: any = {
       video: "https://cdn.magicui.design/bento-grid.mp4",
     },
   ],
-  
+
 } as const;

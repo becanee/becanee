@@ -14,13 +14,13 @@ export default function DateTimeNow({ intervalMs = 60_000 }: { intervalMs?: numb
         dismissible: true,
         closeButton: true,
         duration: Infinity,
-        position: 'bottom-center',
+        position: 'bottom-right',
         action: {
           label: 'Check it out',
           onClick: () => window.open('https://n8n.becaneee.xyz', '_blank'),
         },
       })
-    }, 8000);
+    }, 6000);
   }, [])
   return <span className="text-xl font-bold tracking-tighter sm:text-xl xl:text-xl/none" >{now}</span>;
 }
