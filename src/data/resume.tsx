@@ -79,12 +79,12 @@ export const DATA: any = {
     email: "me@becaneee.xyz",
     tel: "+6281932709954",
     social: {
-      n8nTemplates: {
-        name: "n8n Templates",
-        url: "https://n8n.becaneee.xyz",
-        icon: Icons.n8n,
-        navbar: true,
-      },
+      // n8nTemplates: {
+      //   name: "n8n Templates",
+      //   url: "https://n8n.becaneee.xyz",
+      //   icon: Icons.n8n,
+      //   navbar: true,
+      // },
       // restAPI: {
       //   name: "Rest API",
       //   url: "https://api.becaneee.xyz",
@@ -247,8 +247,8 @@ export const DATA: any = {
   projects: [
     {
       title: "Tekno AI Subscription",
-      href: "/",
-      dates: "⌛ work in progress",
+      href: "https://tekno.becaneee.xyz",
+      dates: "August 2025",
       active: true,
       description:
         "Connect to premium service things together. Join this community of tech enthusiasts.",
@@ -260,35 +260,14 @@ export const DATA: any = {
         "n8n",
       ],
       links: [
-        // {
-        //   type: "Visit",
-        //   href: "/",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
+        {
+          type: "Visit",
+          href: "https://tekno.becaneee.xyz",
+
+          icon: <Icons.globe className="size-3" />,
+        },
       ],
       image: "/project-tekno.png",
-      video: "",
-    },
-    {
-      title: "Public Rest API",
-      href: "/",
-      dates: "⌛ work in progress",
-      active: true,
-      description:
-        "Discover all available public rest api for your business needs.",
-      technologies: [
-        "Next.js",
-        "Supabase",
-        "SerpApi",
-      ],
-      links: [
-        // {
-        //   type: "Visit",
-        //   href: "/",
-        //   icon: <Icons.globe className="size-3" />,
-        // },
-      ],
-      image: "/project-api.png",
       video: "",
     },
     {

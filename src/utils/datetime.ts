@@ -9,7 +9,7 @@ import "moment/locale/id";
  */
 export function formatDateTimeIndonesian(date?: Date | string): string {
   const m = date ? moment(date) : moment();
-  m.locale("id");
+  m.locale("en");
   // Example target: "Minggu, 10 Agustus 2025 | 03:05 Pagi"
   // Note: Use mm for minutes without extra space
   return `${m.format("dddd, DD MMMM YYYY")} | ${m.format("HH:mm")} ${m.format("A")}`

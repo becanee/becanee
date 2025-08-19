@@ -23,7 +23,7 @@ export default async function Page() {
                 {`${DATA.name.split(" ")[0]}`}
               </TextAnimate>
               <BlurFade delay={BLUR_FADE_DELAY}>
-                <MorphingText texts={DATA.description} className="text-xl font-bold tracking-tighter text-left sm:text-xl xl:text-xl/none mb-3" />
+                <MorphingText texts={DATA.description} className="text-2xl font-bold tracking-tighter text-left sm:text-2xl 2xl:text-2xl/none mb-3" />
               </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
@@ -139,7 +139,7 @@ export default async function Page() {
             <TypingAnimationTerminal className="px-2">&gt; lets connect with me</TypingAnimationTerminal>
 
             <AnimatedSpan className="text-green-500 px-4">
-              <span>✔ Whatsapp +62 819-3270-9954</span>
+              <span>✔ Whatsapp +44 74 5588 9391</span>
             </AnimatedSpan>
 
             <AnimatedSpan className="text-pink-500 px-4">
@@ -151,7 +151,7 @@ export default async function Page() {
             </AnimatedSpan>
 
             <TypingAnimationTerminal className="text-muted-foreground px-2">
-              feel free to ask for building new projects
+              feel free to ask for crafting new platforms
             </TypingAnimationTerminal>
           </Terminal>
 
