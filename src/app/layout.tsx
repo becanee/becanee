@@ -175,7 +175,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          {children}
+            {children}
           <Toaster position="top-right" richColors />
         </ThemeProvider>
       </body>

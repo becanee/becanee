@@ -7,15 +7,15 @@ import {
     CardContent,
     CardHeader
 } from "@/components/ui/card";
+import { getUserCookie } from "@/lib/cookie";
 import { IconAlertHexagon } from "@tabler/icons-react";
-import { CalendarDays } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function CardProfile() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
-
+    const user = getUserCookie()
 
     useEffect(() => {
         setMounted(true);
@@ -30,15 +30,15 @@ export function CardProfile() {
             <CardHeader>
                 <div className="flex">
                     <Avatar className="w-12 h-12">
-                        <AvatarImage src={'https://github.com/shadcn.png'} />
+                        <AvatarImage src={user?.avatar ? user?.avatar : ''} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div className="ml-2 flex flex-col">
                         <div className="text-lg font-bold">
-                            Rama Aditya
+                            {user?.name}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                            rama@klola.id
+                            {user?.email}
                         </div>
                     </div>
                 </div>
@@ -48,35 +48,35 @@ export function CardProfile() {
                     <div className="grid auto-rows-min gap-4 grid-cols-2 md:grid-cols-4">
                         <div>
                             <h1 className="flex text-md font-bold uppercase"> klola ID</h1>
-                            <p className="text-muted-foreground">Staging</p>
+                            <p className="text-muted-foreground">{user?.klola_id}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase">nip</h1>
-                            <p className="text-muted-foreground">KL0014</p>
+                            <p className="text-muted-foreground">{user?.nip}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase">rank</h1>
-                            <p className="text-muted-foreground">Staff IT</p>
+                            <p className="text-muted-foreground">{user?.rank}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase"> grade</h1>
-                            <p className="text-muted-foreground">Staff IT</p>
+                            <p className="text-muted-foreground">{user?.grade}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase"> department</h1>
-                            <p className="text-muted-foreground">Information Technology</p>
+                            <p className="text-muted-foreground">{user?.department}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase">divisi</h1>
-                            <p className="text-muted-foreground">Information Technology</p>
+                            <p className="text-muted-foreground">{user?.divisi}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase">unit</h1>
-                            <p className="text-muted-foreground">Head Office</p>
+                            <p className="text-muted-foreground">{user?.unit}</p>
                         </div>
                         <div>
                             <h1 className="flex text-md font-bold uppercase">office</h1>
-                            <p className="text-muted-foreground">Jakarta</p>
+                            <p className="text-muted-foreground">{user?.office}</p>
                         </div>
                     </div>
 

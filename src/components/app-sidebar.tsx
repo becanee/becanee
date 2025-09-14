@@ -3,16 +3,10 @@
 import {
   AudioWaveform,
   BriefcaseBusiness,
-  Cog,
   Command,
-  FileClock,
-  FileText,
   GalleryVerticalEnd,
   LayoutDashboard,
-  NotebookPen,
-  School,
-  ShoppingCart,
-  Users
+  NotebookPen
 } from "lucide-react"
 import * as React from "react"
 
@@ -25,6 +19,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { getUserCookie } from "@/lib/cookie"
 import { NavAdmin } from "./nav-admin"
 
 // This is sample data.
@@ -54,14 +49,14 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/",
+      url: "/d",
       icon: LayoutDashboard,
       isActive: true,
       items: [],
     },
     {
       title: "myAssessment",
-      url: "/my-assessment",
+      url: "/d/my-assessment",
       icon: NotebookPen,
       isActive: false,
       items: [],
@@ -93,7 +88,7 @@ const data = {
   navAdmin: [
     {
       title: "Dashboard",
-      url: "/",
+      url: "/d",
       icon: LayoutDashboard,
       isActive: true,
       items: [],
@@ -158,11 +153,12 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const user = getUserCookie()
   return (
     <Sidebar collapsible="icon" variant="floating" {...props}>
       <SidebarHeader>
         {/* <TeamSwitcher teams={data.teams} /> */}
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
