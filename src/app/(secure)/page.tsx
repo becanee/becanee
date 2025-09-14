@@ -23,7 +23,7 @@ export default function AuthCallback() {
         }
       });
 
-      if (checkResponse?.data?.data) {
+      if (checkResponse?.data?.data && checkResponse?.data?.data?.active) {
         setCookie('_S', subdomain, {
           maxAge: 60 * 60 * 24 * 1, // 1 hari
           httpOnly: false,

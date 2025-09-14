@@ -1,15 +1,15 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils"
+import { IconLoader } from "@tabler/icons-react"
+import { getCookie } from "cookies-next"
 import { GalleryVerticalEnd } from "lucide-react"
+import Link from "next/link"
 import { FormEvent, useState } from "react"
 import { useAuthLogic } from "./_logic"
-import Link from "next/link"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { IconLoader } from "@tabler/icons-react"
 
 export function LoginForm({
     className,
@@ -17,14 +17,13 @@ export function LoginForm({
 }: React.ComponentProps<"form">) {
     const [employeeId, setEmployeeId] = useState('');
     const [password, setPassword] = useState('');
-    const [scope, setScope] = useState('demo');
     const { isLoading, error, handleLogin, validateForm, clearError } = useAuthLogic();
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         if (validateForm(employeeId, password)) {
-            await handleLogin(employeeId, password, scope);
+            await handleLogin(employeeId, password, getCookie('_S') || process.env.NEXT_PUBLIC_SCOPE);
         }
     };
 
@@ -50,21 +49,14 @@ export function LoginForm({
                     DEVELOPMENT MODE CAN SELECT SCOPE
                 </div> */}
                 <div className="grid gap-3">
-                    <Label htmlFor="employee_id">Scope</Label>
-                    <Select defaultValue={scope} onValueChange={(value) => {
-                        setScope(value);
-                        if (error) clearError();
-                    }}>
-                        <SelectTrigger className="w-auto">
-                            <SelectValue placeholder="Select Scope..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="staging">Staging</SelectItem>
-                            <SelectItem value="demo">Demo</SelectItem>
-                            <SelectItem value="dev">Dev</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <small className="text-[12px] text-orange-500 -mt-2">*development mode only</small>
+                    <Label htmlFor="scope">Scope</Label>
+                    <Input
+                        id="scope"
+                        type="text"
+                        placeholder="staging"
+                        value={getCookie('_S')?.toString() || process.env.NEXT_PUBLIC_SCOPE}
+                        disabled
+                    />
                 </div>
                 <div className="grid gap-3">
                     <Label htmlFor="employee_id">Employee ID</Label>

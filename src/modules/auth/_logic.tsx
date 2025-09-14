@@ -24,7 +24,7 @@ export const useAuthLogic = () => {
      * @param password - Password dari user
      * @param scope - Scope from select (DEV MODE)
      */
-    const handleLogin = async (employeeId: string, password: string, scope: string) => {
+    const handleLogin = async (employeeId: string, password: string, scope: any) => {
         setIsLoading(true);
         setError(null);
 
