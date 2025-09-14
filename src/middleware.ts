@@ -4,11 +4,13 @@
  * Created By: becaneee.xyz
  */
 
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const host = request.headers.get('host');
+
 
   // Check jika user mengakses secure routes
   if (pathname.startsWith('/d') || pathname.startsWith('/office')) {

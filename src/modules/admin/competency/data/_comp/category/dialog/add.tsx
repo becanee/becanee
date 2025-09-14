@@ -8,17 +8,49 @@ import {
     DialogDescription,
     DialogFooter,
     DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+    DialogTitle
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { IconDeviceSdCard, IconPlus, IconX } from "@tabler/icons-react"
+import { getUserCookie } from "@/lib/cookie"
+import { IconDeviceSdCard, IconX } from "@tabler/icons-react"
+import { getCookie } from "cookies-next"
+import { useState } from "react"
+import { toast } from "sonner"
 
-export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAdd: (open: boolean) => void }) {
+export function AddDialog({ openAdd, setOpenAdd, addData }: any) {
+    const user = getUserCookie();
+
+    const [formData, setFormData] = useState({
+        created_by: user?.name,
+        klola_id: getCookie('_S')?.toString().toUpperCase(),
+        code: '',
+        name: '',
+        description: '',
+        category: '',
+        proficiency: '',
+        active: false
+    });
+
+    const handleInputChange = (field: string, value: any) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handleSubmit = async () => {
+        if (!formData.klola_id || !formData.name) {
+            toast.error('Klola ID dan Nama wajib diisi');
+            return;
+        }
+
+        await addData(formData);
+        setOpenAdd(false);
+    };
+    
     return (
         <Dialog open={openAdd} onOpenChange={setOpenAdd}>
             <DialogContent blurIntensity="sm" className="sm:max-w-[700px]">
@@ -33,24 +65,24 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                         <Label htmlFor="set-id">Klola ID</Label>
                         <Input
                             id="set-id"
-                            // value={formData.set_id}
+                            value={formData.klola_id?.toString()}
                             disabled
-                            // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                            onChange={(e) => handleInputChange('klola_id', e.target.value)}
                             placeholder="staging"
                         />
                     </div>
                     <div className="grid gap-3">
                         <Label htmlFor="airplane-mode">Is Active</Label>
-                        <Switch id="airplane-mode" />
+                        <Switch id="airplane-mode" checked={formData.active} onCheckedChange={(e) => handleInputChange('active', e)} />
                     </div>
                 </div>
                 <div className="grid gap-3">
                     <Label htmlFor="set-id">Name</Label>
                     <Input
                         id="set-id"
-                        // value={formData.set_id}
+                        value={formData.name}
                         // disabled
-                        // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
                         placeholder="Enter name"
                     />
                 </div>
@@ -58,9 +90,9 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                     <Label htmlFor="set-id">Description</Label>
                     <Textarea
                         id="set-id"
-                        // value={formData.set_id}
+                        value={formData.description}
                         // disabled
-                        // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
                         placeholder="Enter description"
                     />
                 </div>
@@ -68,7 +100,7 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                     <DialogClose asChild>
                         <Button variant="destructive" size="sm"><IconX />Cancel</Button>
                     </DialogClose>
-                    <Button variant="outline" size="sm"><IconDeviceSdCard /> Save Changes</Button>
+                    <Button variant="outline" size="sm" onClick={handleSubmit}><IconDeviceSdCard /> Save Changes</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -11,6 +11,7 @@ import {
     CardTitle
 } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
     Table,
     TableBody,
@@ -19,36 +20,31 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table";
-import { IconEdit, IconMenuDeep, IconPlus, IconTrash } from "@tabler/icons-react";
+import { IconEdit, IconEye, IconMenuDeep, IconPlus, IconTrash } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { AddDialog } from "./dialog/add";
-import { UpdateDialog } from "./dialog/update";
 import { DeleteDialog } from "./dialog/delete";
-
-const invoices = [
-    {
-        id: "1",
-        klola_id: "staging",
-        name: "Non Technical",
-        description: "lorem ipsum",
-        is_active: true,
-    },
-    {
-        id: "2",
-        klola_id: "staging",
-        name: "Technical",
-        description: "lorem ipsum",
-        is_active: false,
-    },
-]
+import { UpdateDialog } from "./dialog/update";
+import useLogic from "./use-logic";
 
 export function CardCategory() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const [openAdd, setOpenAdd] = useState(false);
-    const [openUpdate, setOpenUpdate] = useState(false);
-    const [openDelete, setOpenDelete] = useState(false);
+    const [openUpdate, setOpenUpdate] = useState({
+        data: null,
+        isOpen: false,
+    });
+    const [openDelete, setOpenDelete] = useState({
+        data: null,
+        isOpen: false,
+    });
+    const [openView, setOpenView] = useState({
+        data: null,
+        isOpen: false,
+    });
+    const { data, loading, addData, updateData, deleteData } = useLogic();
 
 
     useEffect(() => {
@@ -64,9 +60,9 @@ export function CardCategory() {
                 <ShineBorder shineColor={shineColor} />
                 <CardHeader className="flex justify-between">
                     <div>
-                        <CardTitle>Category Management</CardTitle>
+                        <CardTitle>Competency Management</CardTitle>
                         <CardDescription>
-                            Manage competencies category and their details
+                            Manage competencies and their details
                         </CardDescription>
                     </div>
                     <Button variant="secondary" onClick={() => setOpenAdd(!openAdd)}><IconPlus /> Add Category</Button>
@@ -83,43 +79,51 @@ export function CardCategory() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {invoices.map((data: any, k: number) => (
-                                <TableRow key={k}>
-                                    <TableCell className="font-medium">{k + 1}</TableCell>
-                                    <TableCell>{data.klola_id}</TableCell>
-                                    <TableCell>{data.name}</TableCell>
-                                    <TableCell>{data.description}</TableCell>
-                                    <TableCell>
-                                        <TableCell>
-                                            {
-                                                data.is_active ? <Badge variant="secondary" className="rounded-sm bg-green-800">Active</Badge>
-                                                    : <Badge variant="secondary" className="rounded-sm bg-red-800">Inactive</Badge>
-                                            }
+                            {
+                                loading && data?.length === 0 ? (
+                                    <TableRow>
+                                        <TableCell colSpan={8} className="text-center">
+                                            <Skeleton className="h-10 w-full" />
                                         </TableCell>
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="outline" size="sm"><IconMenuDeep /></Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent className="w-auto" align="start">
-                                                <DropdownMenuLabel>Action Menu</DropdownMenuLabel>
-                                                <DropdownMenuGroup>
-                                                    <DropdownMenuItem onClick={() => setOpenUpdate(!openUpdate)}>
-                                                        <IconEdit />
-                                                        Update
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuGroup>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuItem variant="destructive" onClick={() => setOpenDelete(!openDelete)}>
-                                                    <IconTrash />
-                                                    Delete
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                                    </TableRow>
+                                ) : <>
+                                    {data?.map((i: any, k: number) => (
+                                        <TableRow key={k}>
+                                            <TableCell className="font-medium">{k + 1}</TableCell>
+                                            <TableCell>{i?.klola_id}</TableCell>
+                                            <TableCell>{i?.name}</TableCell>
+                                            <TableCell>{i?.description}</TableCell>
+                                            <TableCell>
+                                                {
+                                                    i?.active ? <Badge variant="secondary" className="rounded-sm bg-green-800">Active</Badge>
+                                                        : <Badge variant="secondary" className="rounded-sm bg-red-800">Inactive</Badge>
+                                                }
+                                            </TableCell>
+                                            <TableCell className="text-right">
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button variant="outline" size="sm"><IconMenuDeep /></Button>
+                                                    </DropdownMenuTrigger>
+                                                    <DropdownMenuContent className="w-auto" align="start">
+                                                        <DropdownMenuLabel>Action Menu</DropdownMenuLabel>
+                                                        <DropdownMenuGroup>
+                                                            <DropdownMenuItem onClick={() => setOpenUpdate({ data: i, isOpen: !openUpdate.isOpen })}>
+                                                                <IconEdit />
+                                                                Update
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuGroup>
+                                                        <DropdownMenuSeparator />
+                                                        <DropdownMenuItem variant="destructive" onClick={() => setOpenDelete({ data: i, isOpen: !openDelete.isOpen })}>
+                                                            <IconTrash />
+                                                            Delete
+                                                        </DropdownMenuItem>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </>
+                            }
                         </TableBody>
                         {/* <TableFooter>
                         <TableRow>
@@ -132,9 +136,9 @@ export function CardCategory() {
 
             </Card>
 
-            <AddDialog openAdd={openAdd} setOpenAdd={setOpenAdd} />
-            <UpdateDialog openUpdate={openUpdate} setOpenUpdate={setOpenUpdate} />
-            <DeleteDialog openDelete={openDelete} setOpenDelete={setOpenDelete} />
+            <AddDialog openAdd={openAdd} setOpenAdd={setOpenAdd} addData={addData} />
+            <UpdateDialog openUpdate={openUpdate.isOpen} setOpenUpdate={() => setOpenUpdate({ ...openUpdate, isOpen: !openUpdate.isOpen })} onUpdateData={updateData} updateData={openUpdate?.data} />
+            <DeleteDialog openDelete={openDelete.isOpen} setOpenDelete={setOpenDelete} onDeleteData={deleteData} deleteData={openDelete?.data} />
         </>
     );
 }

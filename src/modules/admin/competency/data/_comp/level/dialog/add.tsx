@@ -15,9 +15,40 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
+import { getUserCookie } from "@/lib/cookie"
 import { IconDeviceSdCard, IconX } from "@tabler/icons-react"
+import { getCookie } from "cookies-next"
+import { useState } from "react"
+import { toast } from "sonner"
 
-export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAdd: (open: boolean) => void }) {
+export function AddDialog({ openAdd, setOpenAdd, addData }: any) {
+    const user = getUserCookie();
+
+    const [formData, setFormData] = useState({
+        created_by: user?.name,
+        klola_id: getCookie('_S')?.toString().toUpperCase(),
+        qualification: '',
+        level: 1,
+        description: '',
+        active: false
+    });
+
+    const handleInputChange = (field: string, value: any) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handleSubmit = async () => {
+        if (!formData.klola_id || !formData.qualification) {
+            toast.error('Klola ID dan Qualification wajib diisi');
+            return;
+        }
+
+        await addData(formData);
+        setOpenAdd(false);
+    };
     return (
         <Dialog open={openAdd} onOpenChange={setOpenAdd}>
             <DialogContent blurIntensity="sm" className="sm:max-w-[700px]">
@@ -32,38 +63,41 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                         <Label htmlFor="set-id">Klola ID</Label>
                         <Input
                             id="set-id"
-                            // value={formData.set_id}
+                            value={formData.klola_id}
                             disabled
-                            // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                            onChange={(e) => handleInputChange('klola_id', e.target.value)}
                             placeholder="staging"
                         />
                     </div>
                     <div className="grid gap-3">
                         <Label htmlFor="airplane-mode">Is Active</Label>
-                        <Switch id="airplane-mode" />
+                        <Switch id="airplane-mode" defaultChecked={formData.active} onCheckedChange={(checked) => handleInputChange('active', checked)} />
                     </div>
                     <div className="grid gap-3">
-                        <Label htmlFor="set-id">Name</Label>
+                        <Label htmlFor="set-id">Qualification</Label>
                         <Input
                             id="set-id"
-                            // value={formData.set_id}
+                            value={formData.qualification}
                             // disabled
-                            // onChange={(e) => handleInputChange('set_id', e.target.value)}
-                            placeholder="Enter name"
+                            onChange={(e) => handleInputChange('qualification', e.target.value)}
+                            placeholder="Enter qualification"
                         />
                     </div>
                     <div className="grid gap-3">
                         <Label htmlFor="difficulty">Level</Label>
                         <Select
-                        // onValueChange={(value) => handleInputChange('difficulty', value)}
+                            defaultValue={formData.level.toString()}
+                            onValueChange={(value) => handleInputChange('level', value)}
                         >
                             <SelectTrigger className="w-auto">
                                 <SelectValue placeholder="Select level" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="1">1 - Beginner</SelectItem>
-                                <SelectItem value="2">2 - Advanced</SelectItem>
-                                <SelectItem value="3">3 - Competent</SelectItem>
+                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item: any) => (
+                                    <SelectItem key={item} value={item}>
+                                        Level {item}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>
@@ -72,9 +106,9 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                     <Label htmlFor="set-id">Description</Label>
                     <Textarea
                         id="set-id"
-                        // value={formData.set_id}
+                        value={formData.description}
                         // disabled
-                        // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
                         placeholder="Enter description"
                     />
                 </div>
@@ -82,7 +116,7 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                     <DialogClose asChild>
                         <Button variant="destructive" size="sm"><IconX />Cancel</Button>
                     </DialogClose>
-                    <Button variant="outline" size="sm"><IconDeviceSdCard /> Save Changes</Button>
+                    <Button variant="outline" size="sm" onClick={handleSubmit}><IconDeviceSdCard /> Save Changes</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

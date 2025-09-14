@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { setCookie, deleteCookie } from 'cookies-next';
 import { encryptData } from '@/lib/crypto';
 import axios from 'axios';
+import { deleteCookie, setCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 /**
@@ -29,13 +29,6 @@ export const useAuthLogic = () => {
         setError(null);
 
         try {
-            setCookie('_S', scope, {
-                maxAge: 60 * 60 * 24 * 1, // 1 hari
-                httpOnly: false,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict'
-            });
-
             // Step 1: Hit API login
             const loginResponse = await axios.post('/api/auth', {
                 username: employeeId,
@@ -65,7 +58,15 @@ export const useAuthLogic = () => {
             toast.success(verifyResponse.data.message || 'Sign in berhasil');
             const userData = verifyResponse.data.data;
 
-            // Step 3: Simpan token di cookie dengan nama "_T"
+            // Step 3: Simpan scope di cookie dengan nama "_S"
+            setCookie('_S', scope, {
+                maxAge: 60 * 60 * 24 * 1, // 1 hari
+                httpOnly: false,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            });
+
+            // Step 4: Simpan token di cookie dengan nama "_T"
             setCookie('_T', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
                 maxAge: 60 * 60 * 24 * 1, // 1 hari
                 httpOnly: false,
@@ -73,7 +74,7 @@ export const useAuthLogic = () => {
                 sameSite: 'strict'
             });
 
-            // Step 4: Enkripsi dan simpan data user di cookie dengan nama "_U"
+            // Step 5: Enkripsi dan simpan data user di cookie dengan nama "_U"
             const encryptedUserData = encryptData(userData);
             setCookie('_U', encryptedUserData, {
                 maxAge: 60 * 60 * 24 * 1, // 1 hari
@@ -82,7 +83,7 @@ export const useAuthLogic = () => {
                 sameSite: 'strict'
             });
 
-            // Step 5: Redirect ke halaman utama
+            // Step 6: Redirect ke halaman utama
             router.push('/d');
 
         } catch (error: any) {

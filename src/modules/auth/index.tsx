@@ -9,6 +9,7 @@ import { FormEvent, useState } from "react"
 import { useAuthLogic } from "./_logic"
 import Link from "next/link"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { IconLoader } from "@tabler/icons-react"
 
 export function LoginForm({
     className,
@@ -104,6 +105,7 @@ export function LoginForm({
                     />
                 </div>
                 <Button variant="secondary" className="w-full" disabled={isLoading}>
+                    {isLoading && <IconLoader className="animate-spin" />}
                     {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">

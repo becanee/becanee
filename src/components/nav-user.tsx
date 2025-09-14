@@ -30,6 +30,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useAuthLogic } from "@/modules/auth/_logic"
+import { Skeleton } from "./ui/skeleton"
 
 export function NavUser({
   user,
@@ -42,6 +43,10 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
   const { handleLogout } = useAuthLogic()
+
+  if(!user) {
+    return <Skeleton className="h-10 w-full" />
+  }
 
   return (
     <SidebarMenu>
@@ -81,28 +86,6 @@ export function NavUser({
                 </div>
               </div>
             </DropdownMenuLabel>
-            {/* <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive" onClick={handleLogout}>
               <LogOut />
