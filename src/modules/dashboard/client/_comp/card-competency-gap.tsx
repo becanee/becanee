@@ -1,7 +1,7 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts"
+import { Bar, BarChart, CartesianGrid, PolarAngleAxis, PolarGrid, Radar, RadarChart, XAxis } from "recharts"
 
 import {
     Card,
@@ -43,7 +43,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function CardRadarChart() {
+export function CardCompetencyGap() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -64,6 +64,7 @@ export function CardRadarChart() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="pb-0">
+                <div className="grid auto-rows-min gap-4 grid-cols-1 md:grid-cols-2">
                 <ChartContainer
                     config={chartConfig}
                     className="mx-auto max-h-[400px]"
@@ -84,6 +85,27 @@ export function CardRadarChart() {
                         <ChartLegend className="mt-0" content={<ChartLegendContent />} />
                     </RadarChart>
                 </ChartContainer>
+
+                <ChartContainer config={chartConfig}>
+                    <BarChart accessibilityLayer data={chartData}>
+                        <CartesianGrid vertical={true} />
+                        <XAxis
+                            dataKey="month"
+                            tickLine={true}
+                            tickMargin={10}
+                            axisLine={true}
+                            tickFormatter={(value) => value}
+                        />
+                        <ChartTooltip
+                            cursor={false}
+                            content={({ payload }) => <ChartTooltipContent indicator="dashed" />}
+                        />
+                        <Bar dataKey="level" fill="var(--color-chart-1)" radius={4} />
+                        <Bar dataKey="result" fill="var(--color-chart-2)" radius={4} />
+                        <ChartLegend className="mt-0" content={<ChartLegendContent />} />
+                    </BarChart>
+                </ChartContainer>
+                </div>
             </CardContent>
             {/* <CardFooter className="flex-col gap-2 text-sm">
                 <div className="flex items-center gap-2 leading-none font-medium">

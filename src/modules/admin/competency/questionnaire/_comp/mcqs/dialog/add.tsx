@@ -15,16 +15,50 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
+import { getUserCookie } from "@/lib/cookie"
 import { IconDeviceSdCard, IconX } from "@tabler/icons-react"
+import { getCookie } from "cookies-next"
+import { useState } from "react"
+import { toast } from "sonner"
 
-export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAdd: (open: boolean) => void }) {
+export function AddDialog({ openAdd, level, setOpenAdd, addData }: any) {
+    const user = getUserCookie();
+
+    const [formData, setFormData] = useState({
+        created_by: user?.name,
+        klola_id: getCookie('_S')?.toString().toUpperCase(),
+        name: '',
+        description: '',
+        set_amount: 0,
+        difficulty: '',
+        document: null,
+        active: false
+    });
+    console.log("level", level);
+
+    const handleInputChange = (field: string, value: any) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handleSubmit = async () => {
+        if (!formData.klola_id || !formData.name) {
+            toast.error('Klola ID dan Nama wajib diisi');
+            return;
+        }
+
+        await addData(formData);
+        setOpenAdd(false);
+    };
     return (
         <Dialog open={openAdd} onOpenChange={setOpenAdd}>
             <DialogContent blurIntensity="sm" className="sm:max-w-[700px]">
                 <DialogHeader>
-                    <DialogTitle>Add MCQs Set</DialogTitle>
+                    <DialogTitle>Add MCQS</DialogTitle>
                     <DialogDescription>
-                        Add new esay set. Click save when you&apos;re done.
+                        Add new MCQS. Click save when you&apos;re done.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid auto-rows-min grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto max-h-[calc(100vh-200px)]">
@@ -32,23 +66,23 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                         <Label htmlFor="set-id">Klola ID</Label>
                         <Input
                             id="set-id"
-                            // value={formData.set_id}
+                            value={formData.klola_id}
                             disabled
-                            // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                            onChange={(e) => handleInputChange('klola_id', e.target.value)}
                             placeholder="staging"
                         />
                     </div>
                     <div className="grid gap-3">
                         <Label htmlFor="airplane-mode">Is Active</Label>
-                        <Switch id="airplane-mode" />
+                        <Switch id="airplane-mode" defaultChecked={formData.active} onCheckedChange={(checked) => handleInputChange('active', checked)} />
                     </div>
                     <div className="grid gap-3">
                         <Label htmlFor="set-id">Name</Label>
                         <Input
                             id="set-id"
-                            // value={formData.set_id}
+                            value={formData.name}
                             // disabled
-                            // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                            onChange={(e) => handleInputChange('name', e.target.value)}
                             placeholder="Enter name"
                         />
                     </div>
@@ -57,9 +91,9 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                         <Input
                             id="set-id"
                             type="number"
-                            // value={formData.set_id}
+                            value={formData.set_amount}
                             // disabled
-                            // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                            onChange={(e) => handleInputChange('set_amount', e.target.value)}
                             placeholder="Enter total quiz"
                         />
                     </div>
@@ -67,13 +101,13 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                 <div className="grid gap-3">
                     <Label htmlFor="difficulty">Difficulty</Label>
                     <Select
-                    // onValueChange={(value) => handleInputChange('difficulty', value)}
+                        onValueChange={(value) => handleInputChange('difficulty', value)}
                     >
                         <SelectTrigger className="w-auto">
                             <SelectValue placeholder="Select difficulty" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="Essay">Easy</SelectItem>
+                            <SelectItem value="Easy">Easy</SelectItem>
                             <SelectItem value="Medium">Medium</SelectItem>
                             <SelectItem value="Hard">Hard</SelectItem>
                             <SelectItem value="Mix">Mix (Esay, Medium, Hard)</SelectItem>
@@ -84,9 +118,9 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                     <Label htmlFor="set-id">Description</Label>
                     <Textarea
                         id="set-id"
-                        // value={formData.set_id}
+                        value={formData.description}
                         // disabled
-                        // onChange={(e) => handleInputChange('set_id', e.target.value)}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
                         placeholder="Enter description"
                     />
                 </div>
@@ -109,7 +143,7 @@ export function AddDialog({ openAdd, setOpenAdd }: { openAdd: boolean, setOpenAd
                     <DialogClose asChild>
                         <Button variant="destructive" size="sm"><IconX />Cancel</Button>
                     </DialogClose>
-                    <Button variant="outline" size="sm"><IconDeviceSdCard /> Save Changes</Button>
+                    <Button variant="outline" size="sm" onClick={handleSubmit}><IconDeviceSdCard /> Save</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

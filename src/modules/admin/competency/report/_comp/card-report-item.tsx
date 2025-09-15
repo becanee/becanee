@@ -1,3 +1,4 @@
+import { ShineBorder } from "@/components/magicui/shine-border";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -7,14 +8,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ShineBorder } from "@/components/magicui/shine-border";
 import { IconEyeSearch, IconFileAnalytics, IconFileTypePdf, IconFileTypeXls } from "@tabler/icons-react";
 
 export function CardReportItem({ report }: { report: any }) {
-    console.log(report);
-
     return (
         <Card className="relative overflow-hidden max-w-auto w-full">
             <ShineBorder shineColor={["#3B82F6", "#60A5FA", "#FFFFFF"]} />

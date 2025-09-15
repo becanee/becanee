@@ -17,7 +17,7 @@ import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { IconDeviceSdCard, IconX } from "@tabler/icons-react"
 
-export function UpdateDialog({ openUpdate, setOpenUpdate }: { openUpdate: boolean, setOpenUpdate: (open: boolean) => void }) {
+export function UpdateDialog({ openUpdate, setOpenUpdate, onUpdateData, updateData }: any) {
     return (
         <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
             <DialogContent blurIntensity="sm" className="sm:max-w-[700px]">

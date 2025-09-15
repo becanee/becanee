@@ -56,7 +56,7 @@ export function CardProficiency() {
                 <ShineBorder shineColor={shineColor} />
                 <CardHeader className="flex justify-between">
                     <div>
-                        <CardTitle>Competency Management</CardTitle>
+                        <CardTitle>Proficiency Management</CardTitle>
                         <CardDescription>
                             Manage competencies and their details
                         </CardDescription>

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { IconTrash, IconX } from "@tabler/icons-react"
 
-export function DeleteDialog({ openDelete, setOpenDelete }: { openDelete: boolean, setOpenDelete: (open: boolean) => void }) {
+export function DeleteDialog({ openDelete, setOpenDelete, onDeleteData, deleteData }: any) {
     return (
         <AlertDialog open={openDelete} onOpenChange={setOpenDelete}>
             <AlertDialogContent blurIntensity="sm">
@@ -22,7 +22,7 @@ export function DeleteDialog({ openDelete, setOpenDelete }: { openDelete: boolea
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel><IconX />Cancel</AlertDialogCancel>
-                    <AlertDialogAction className="bg-red-400 dark:text-white"><IconTrash />Delete</AlertDialogAction>
+                    <AlertDialogAction className="bg-red-400 dark:text-white" onClick={() => onDeleteData(deleteData?.id)}><IconTrash />Delete</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

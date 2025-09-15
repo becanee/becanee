@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/sidebar"
 import { ConfigureMcqsModule } from "@/modules/admin/competency/questionnaire/_comp/mcqs/configure"
 
-export default function Page() {
+export default async function Page({ params }: { params: Promise<any> }) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -54,7 +54,7 @@ export default function Page() {
           <AnimatedThemeToggler className="mr-5" />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <ConfigureMcqsModule />
+          <ConfigureMcqsModule params={await params} />
           <AppFooter />
         </div>
       </SidebarInset>

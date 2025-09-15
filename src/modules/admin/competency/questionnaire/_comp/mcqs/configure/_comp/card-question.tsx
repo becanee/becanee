@@ -1,8 +1,7 @@
 "use client";
 
-import { RainbowButton } from "@/components/magicui/rainbow-button";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { ShineBorder } from "@/components/magicui/shine-border";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -11,6 +10,8 @@ import {
     CardHeader,
     CardTitle
 } from "@/components/ui/card";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
     Table,
     TableBody,
@@ -19,54 +20,30 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table";
-import { IconAi, IconBrandGithubCopilot, IconEdit, IconFileDescription, IconMenuDeep, IconPlus, IconTrash, IconUserOff, IconUsers } from "@tabler/icons-react";
+import { IconCardboards, IconDatabaseCog, IconEdit, IconMenuDeep, IconPlus, IconTrash } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { AddDialog } from "./dialog/add";
-import { UpdateDialog } from "./dialog/update";
 import { DeleteDialog } from "./dialog/delete";
-import { Badge } from "@/components/ui/badge";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { UpdateDialog } from "./dialog/update";
+import useLogic from "./use-logic";
+import Link from "next/link";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
-const invoices: any = [
-    {
-        id: "1",
-        klola_id: "staging",
-        question: "Question 1",
-        answer: "Answer 1",
-        ai_explanation: "lorem ipsum",
-        human_explanation: null,
-        options_1: "lorem ipsum",
-        options_2: "lorem ipsum",
-        options_3: "lorem ipsum",
-        options_4: "lorem ipsum",
-        created_by: "ai",
-        difficulty: "Hard",
-        is_active: false,
-    },
-    {
-        id: "2",
-        klola_id: "staging",
-        question: "Question 2",
-        answer: "Answer 2",
-        ai_explanation: null,
-        human_explanation: "lorem ipsum",
-        options_1: "lorem ipsum",
-        options_2: "lorem ipsum",
-        options_3: "lorem ipsum",
-        options_4: "lorem ipsum",
-        created_by: "human",
-        difficulty: "Easy",
-        is_active: true,
-    },
-]
-
-export function CardQuestion() {
+export function CardQuestion({ id }: { id: string }) {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const [openAdd, setOpenAdd] = useState(false);
-    const [openUpdate, setOpenUpdate] = useState(false);
-    const [openDelete, setOpenDelete] = useState(false);
+    const [openUpdate, setOpenUpdate] = useState({
+        data: null,
+        isOpen: false,
+    });
+    const [openDelete, setOpenDelete] = useState({
+        data: null,
+        isOpen: false,
+    });
+    const { data, parent, loading, addData, updateData, deleteData } = useLogic({ id });
+
 
     useEffect(() => {
         setMounted(true);
@@ -77,30 +54,64 @@ export function CardQuestion() {
 
     return (
         <>
+            <div className="min-w-full md:min-w-lg rounded-xl border text-card-foreground p-4 border-sky-200 dark:border-sky-900 bg-sky-50 dark:bg-sky-950/20 shadow-none">
+                <h2 className="flex gap-2 text-base uppercase md:text-lg font-semibold mb-2 text-sky-900 dark:text-sky-100">
+                    <IconDatabaseCog size={20} className="mt-1" /> Multiple Choice Quiz Set
+                </h2>
+                <div className="grid gap-4 mt-4 grid-cols-2 md:grid-cols-4">
+                    <div>
+                        <h1 className="flex text-sm font-bold uppercase"> Name</h1>
+                        <p className="text-muted-foreground">{parent?.name}</p>
+                    </div>
+                    <div>
+                        <h1 className="flex text-sm font-bold uppercase"> Description</h1>
+                        <p className="text-muted-foreground">{parent?.description}</p>
+                    </div>
+                    <div>
+                        <h1 className="flex text-sm font-bold uppercase"> Total Quiz</h1>
+                        <p className="text-muted-foreground">{parent?.set_amount}</p>
+                    </div>
+                    <div>
+                        <h1 className="flex text-sm font-bold uppercase"> Difficulty</h1>
+                        <p className="text-muted-foreground">{parent?.difficulty}</p>
+                    </div>
+                    <div>
+                        <h1 className="flex text-sm font-bold uppercase"> Document</h1>
+                        <p className="text-muted-foreground">{parent?.document?.name}</p>
+                    </div>
+                </div>
+            </div>
+
             <Card className="relative overflow-hidden">
                 <ShineBorder shineColor={shineColor} />
-                <CardHeader className="flex justify-between items-center">
+                <CardHeader className="flex justify-between">
                     <div>
-                        <CardTitle>Question Setting</CardTitle>
+                        <CardTitle>Question Management</CardTitle>
                         <CardDescription>
-                            Set the question for the assessment
+                            Manage questions and their details
                         </CardDescription>
                     </div>
-                    <div className="flex gap-4">
-                        <Button variant="secondary" size="sm" onClick={() => setOpenAdd(true)}><IconPlus /> Add Question</Button>
-                        {/* <RainbowButton variant="outline" size="sm"><IconBrandGithubCopilot /> Generate</RainbowButton> */}
-                        <ShimmerButton className="shadow-2xl">
-                            <IconAi />&nbsp;Generate
-                        </ShimmerButton>
-                    </div>
+                    {
+                        data?.length > parent?.set_amount &&
+                        <div className="flex gap-2">
+                            <Button variant="secondary" onClick={() => setOpenAdd(!openAdd)}><IconPlus /> Add Question</Button>
+                            <Button className="relative overflow-hidden" variant="outline">
+                                <IconCardboards /> Klola Assistant
+                                <BorderBeam
+                                    size={40}
+                                    initialOffset={20}
+                                    className="from-transparent via-sky-500 to-transparent"
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 60,
+                                        damping: 20,
+                                    }}
+                                />
+                            </Button>
+                        </div>
+                    }
                 </CardHeader>
                 <CardContent>
-                    <div className="flex mb-4 max-w-[8.5rem] items-center gap-2 p-3 bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800 rounded-lg">
-                        <IconFileDescription className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                        <span className="text-sm text-sky-700 dark:text-sky-300">
-                            Total Data: 2
-                        </span>
-                    </div>
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -117,82 +128,97 @@ export function CardQuestion() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {invoices.map((data: any, k: number) => (
-                                <TableRow key={k}>
-                                    <TableCell className="font-medium">{data.id}</TableCell>
-                                    <TableCell>{data.klola_id}</TableCell>
-                                    <TableCell>
-                                        {
-                                            data.is_active ? <Badge variant="secondary" className="rounded-sm bg-green-800">Active</Badge>
-                                                : <Badge variant="secondary" className="rounded-sm bg-red-800">Inactive</Badge>
-                                        }
-                                    </TableCell>
-                                    <TableCell>
-                                        <TableCell>
-                                            {
-                                                data.created_by === "ai" ? <Badge variant="secondary" className="rounded-sm bg-green-800">Klola Assistant</Badge>
-                                                    : <Badge variant="secondary" className="rounded-sm bg-sky-800">Human</Badge>
-                                            }
+                            {
+                                loading && data?.length === 0 ? (
+                                    <TableRow>
+                                        <TableCell colSpan={8} className="text-center">
+                                            <Skeleton className="h-10 w-full" />
                                         </TableCell>
-                                    </TableCell>
-                                    <TableCell>
-                                        <TableCell>
-                                            {
-                                                data.difficulty === "Easy" ? <Badge variant="secondary" className="rounded-sm bg-green-800">Easy</Badge>
-                                                    : data.difficulty === "Medium" ? <Badge variant="secondary" className="rounded-sm bg-sky-800">Medium</Badge>
-                                                        : <Badge variant="secondary" className="rounded-sm bg-red-800">Hard</Badge>
-                                            }
-                                        </TableCell>
-                                    </TableCell>
-                                    <TableCell>{data.question}</TableCell>
-                                    <TableCell>{data.answer}</TableCell>
-                                    <TableCell>{data.ai_explanation}</TableCell>
-                                    <TableCell>{data.human_explanation}</TableCell>
-                                    <TableCell>
-                                        <div>
-                                            <div>A. {data.options_1}</div>
-                                            <div>B. {data.options_2}</div>
-                                            <div>C. {data.options_3}</div>
-                                            <div>D. {data.options_4}</div>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="outline" size="sm"><IconMenuDeep /></Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent className="w-auto" align="start">
-                                                <DropdownMenuLabel>Action Menu</DropdownMenuLabel>
-                                                <DropdownMenuGroup>
-                                                    <DropdownMenuItem onClick={() => setOpenUpdate(!openUpdate)}>
-                                                        <IconEdit />
-                                                        Update
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuGroup>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuItem variant="destructive" onClick={() => setOpenDelete(!openDelete)}>
-                                                    <IconTrash />
-                                                    Delete
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                                    </TableRow>
+                                ) : <>
+                                    {data?.map((i: any, k: number) => (
+                                        <TableRow key={k}>
+                                            <TableCell className="font-medium">{k + 1}</TableCell>
+                                            <TableCell>{i?.klola_id}</TableCell>
+                                            <TableCell>
+                                                {
+                                                    i?.active ? <Badge variant="secondary" className="rounded-sm bg-green-800">Active</Badge>
+                                                        : <Badge variant="secondary" className="rounded-sm bg-red-800">Inactive</Badge>
+                                                }
+                                            </TableCell>
+                                            <TableCell>
+                                                {
+                                                    i?.created_by !== "Klola Assistant" ? <Badge variant="secondary" className="rounded-sm bg-green-800">{i?.created_by}</Badge>
+                                                        : <Badge variant="secondary" className="rounded-sm bg-sky-800">Klola Assistant</Badge>
+                                                }
+                                            </TableCell>
+                                            <TableCell>
+                                                {
+                                                    i?.difficulty === "Easy" ? <Badge variant="secondary" className="rounded-sm bg-green-800">Easy</Badge>
+                                                        : i?.difficulty === "Medium" ? <Badge variant="secondary" className="rounded-sm bg-yellow-800">Medium</Badge>
+                                                            : <Badge variant="secondary" className="rounded-sm bg-red-800">Hard</Badge>
+                                                }
+                                            </TableCell>
+                                            <TableCell>{i?.question}</TableCell>
+                                            <TableCell>{i?.answer}</TableCell>
+                                            <TableCell>{i?.ai_explanation}</TableCell>
+                                            <TableCell>{i?.human_explanation}</TableCell>
+                                            <TableCell>
+                                                <div>
+                                                    <ol>
+                                                        <ul>A. {i?.option_a}</ul>
+                                                        <ul>B. {i?.option_b}</ul>
+                                                        <ul>C. {i?.option_c}</ul>
+                                                        <ul>D. {i?.option_d}</ul>
+                                                    </ol>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell className="text-right">
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button variant="outline" size="sm"><IconMenuDeep /></Button>
+                                                    </DropdownMenuTrigger>
+                                                    <DropdownMenuContent className="w-auto" align="start">
+                                                        <DropdownMenuLabel>Action Menu</DropdownMenuLabel>
+                                                        <DropdownMenuGroup>
+                                                            <Link href={`/office/competency/questionnaire/mcqs/${i.id}`}>
+                                                                <DropdownMenuItem>
+                                                                    <IconDatabaseCog />
+                                                                    Configure
+                                                                </DropdownMenuItem>
+                                                            </Link>
+                                                            <DropdownMenuItem onClick={() => setOpenUpdate({ data: i, isOpen: !openUpdate.isOpen })}>
+                                                                <IconEdit />
+                                                                Update
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuGroup>
+                                                        <DropdownMenuSeparator />
+                                                        <DropdownMenuItem variant="destructive" onClick={() => setOpenDelete({ data: i, isOpen: !openDelete.isOpen })}>
+                                                            <IconTrash />
+                                                            Delete
+                                                        </DropdownMenuItem>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </>
+                            }
                         </TableBody>
                         {/* <TableFooter>
                         <TableRow>
-                            <TableCell colSpan={3}>Total</TableCell>
+                        <TableCell colSpan={3}>Total</TableCell>
                             <TableCell className="text-right">$2,500.00</TableCell>
                         </TableRow>
                     </TableFooter> */}
                     </Table>
                 </CardContent>
+
             </Card>
 
-            <AddDialog openAdd={openAdd} setOpenAdd={setOpenAdd} />
-            <UpdateDialog openUpdate={openUpdate} setOpenUpdate={setOpenUpdate} />
-            <DeleteDialog openDelete={openDelete} setOpenDelete={setOpenDelete} />
+            <AddDialog openAdd={openAdd} setOpenAdd={setOpenAdd} addData={addData} parentID={id} parent={parent} />
+            <UpdateDialog openUpdate={openUpdate.isOpen} setOpenUpdate={() => setOpenUpdate({ ...openUpdate, isOpen: !openUpdate.isOpen })} onUpdateData={updateData} updateData={openUpdate?.data} />
+            <DeleteDialog openDelete={openDelete.isOpen} setOpenDelete={setOpenDelete} onDeleteData={deleteData} deleteData={openDelete?.data} />
         </>
     );
 }
