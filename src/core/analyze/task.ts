@@ -1,0 +1,141 @@
+import { createSystemMessage, createUserMessage } from "@/prompt/analyze/task";
+import Groq from "groq-sdk";
+
+const createGroqClient = (apiKey?: any) => {
+  const key = apiKey || process.env.NEXT_PUBLIC_GROQ_API_KEY;
+  if (!key) {
+    throw new Error("Groq API Key is required");
+  }
+  return new Groq({ apiKey: key });
+};
+
+// Core Function
+const analyzeTask = async (params: any = {}, apiKey?: any) => {
+  const config = {
+    model: params?.config?.model || "meta-llama/llama-4-maverick-17b-128e-instruct",   // Default
+    temperature: params?.config?.temperature || 1,
+    maxTokens: params?.config?.maxTokens || 1024,
+    topP: params?.config?.topP || 1
+  };
+
+  try {
+    const groq: any = createGroqClient(apiKey);
+
+    const chatCompletion = await groq.chat.completions.create({
+      messages: [createSystemMessage(params), createUserMessage(params)],
+      model: config.model,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: "task_analysis",
+          schema: {
+            type: "object",
+            properties: {
+              job_position: { type: "string" },
+              job_departmen: { type: "string" },
+              job_description: { type: "string" },
+              objective: { type: "string" },
+              initiative: { type: "string" },
+              analysis_result: {
+                type: "object",
+                properties: {
+                  probability_employee_achievement: { type: "string" },
+                  predict_employee_performance_levels: { type: "string" },
+                  objective_progress_tracking: {
+                    type: "object",
+                    properties: {
+                      objective_progress: { type: "string" },
+                      target_objective: { type: "string" },
+                      remaining_time: { type: "string" },
+                      required_daily_progress: { type: "string" }
+                    },
+                    required: ["objective_progress", "target_objective", "remaining_time", "required_daily_progress"],
+                    additionalProperties: false
+                  },
+                  initiative_progress_tracking: {
+                    type: "object",
+                    properties: {
+                      initiative_progress: { type: "string" },
+                      target_initiative: { type: "string" },
+                      achievement_rate: { type: "string" },
+                      remaining_time: { type: "string" },
+                      required_daily_progress: { type: "string" },
+                      feedback_analysis: {
+                        type: "object",
+                        properties: {
+                          overall_sentiment: { type: "string" },
+                          confidence_score: { type: "number" },
+                          conclusion: { type: "string" },
+                          sentiment_entities: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                comment: { type: "string" },
+                                role: { type: "string" },
+                                sentiment: { type: "string" },
+                                confidence_score: { type: "number" }
+                              },
+                              required: ["comment", "role", "sentiment", "confidence_score"],
+                              additionalProperties: false
+                            }
+                          }
+                        },
+                        required: ["overall_sentiment", "confidence_score", "conclusion", "sentiment_entities"],
+                        additionalProperties: false
+                      }
+                    },
+                    required: ["initiative_progress", "target_initiative", "achievement_rate", "remaining_time", "required_daily_progress", "feedback_analysis"],
+                    additionalProperties: false
+                  },
+                  suggestion: { type: "string" },
+                  steps: {
+                    type: "array",
+                    items: { type: "string" }
+                  },
+                  suggested_competency: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        competency: { type: "string" },
+                        description: { type: "string" }
+                      },
+                      required: ["competency", "description"],
+                      additionalProperties: false
+                    }
+                  }
+                },
+                required: ["probability_employee_achievement", "predict_employee_performance_levels", "objective_progress_tracking", "initiative_progress_tracking", "suggestion", "steps", "suggested_competency"],
+                additionalProperties: false
+              }
+            },
+            required: ["job_position", "job_departmen", "job_description", "objective", "initiative", "analysis_result"],
+            additionalProperties: false
+          }
+        }
+      },
+      temperature: config.temperature,
+      max_tokens: config.maxTokens,
+      top_p: config.topP,
+      stop: null,
+      stream: false,
+    });
+
+    const content = chatCompletion.choices[0]?.message?.content;
+    return content
+      ? {
+        ...JSON.parse(content),
+        prompt: {
+          system: createSystemMessage(params).content,
+          user: createUserMessage(params).content,
+        },
+      }
+      : null;
+  } catch (error) {
+    console.error("Error analyzing Task:", error);
+    return null;
+  }
+};
+
+export { analyzeTask };
