@@ -45,7 +45,9 @@ const generateKpi = async (params: any = {}, apiKey?: any) => {
                   kpi: { type: "string" },
                   description: { type: "string" },
                   target: { type: "string" },
-                  level_of_importance: { type: "string" }
+                  level_of_importance: { type: "string" },
+                  dimensions: { type: "string" },
+                  example: { type: "string" }
                 },
                 required: ["kpi", "description", "target", "level_of_importance"],
                 additionalProperties: false
