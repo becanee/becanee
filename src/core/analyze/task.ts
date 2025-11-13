@@ -31,11 +31,6 @@ const analyzeTask = async (params: any = {}, apiKey?: any) => {
           schema: {
             type: "object",
             properties: {
-              job_position: { type: "string" },
-              job_departmen: { type: "string" },
-              job_description: { type: "string" },
-              objective: { type: "string" },
-              initiative: { type: "string" },
               analysis_result: {
                 type: "object",
                 properties: {
@@ -44,7 +39,7 @@ const analyzeTask = async (params: any = {}, apiKey?: any) => {
                   job_description: { type: "string" },
                   objective: { type: "string" },
                   initiative: { type: "string" },
-                  analysis_result: {
+                  result: {
                     type: "object",
                     properties: {
                       probability_employee_achievement: { type: "string" },
@@ -61,7 +56,7 @@ const analyzeTask = async (params: any = {}, apiKey?: any) => {
                     additionalProperties: false
                   },
                     },
-                    required: ["objective_progress", "target_objective", "remaining_time", "required_daily_progress"],
+                    required: ["probability_employee_achievement", "predict_employee_performance_levels", "objective_progress_tracking"],
                     additionalProperties: false
                   },
                   initiative_progress_tracking: {
@@ -94,11 +89,11 @@ const analyzeTask = async (params: any = {}, apiKey?: any) => {
                     }
                   }
                 },
-                required: ["probability_employee_achievement", "predict_employee_performance_levels", "objective_progress_tracking", "initiative_progress_tracking", "suggestion", "steps", "suggested_competency"],
+                required: ["job_position", "job_departmen", "job_description", "objective", "initiative", "analysis_result"],
                 additionalProperties: false
               }
             },
-            required: ["job_position", "job_departmen", "job_description", "objective", "initiative", "analysis_result"],
+            required: ["analysis_result"],
             additionalProperties: false
           }
         }
