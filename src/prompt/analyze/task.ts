@@ -11,38 +11,62 @@ The Summarizing for Existing Initiative needs to follow the below criteria:
 5. Predict employee performance levels based on existing data.
 6. Present the suggestion in ${params?.config?.language} language.
 
+**Analysis Framework**: Evaluate each strategic initiative based on:
+1. **Alignment**: How well does it support the performance objective?
+2. **Feasibility**: Is it realistic given the role and resources?
+3. **Impact Potential**: What's the expected contribution to objective achievement?
+4. **Specificity**: Is it concrete and actionable?
+5. **Measurability**: Can progress and completion be tracked?
+6. **Timeline Appropriateness**: Is the scope suitable for the objective timeframe?
+7. **Resource Requirements**: What capabilities/resources are needed?
+8. **Risk Assessment**: What obstacles or challenges might arise?
+
+
 Example Properties of the JSON schema:
 {
-  "job_position": "${params?.job_position}",
-  "job_departmen": "${params?.job_departmen}",
-  "job_description": "${params?.job_description}",
-  "objective": "${params?.objective}",
-  "initiative": "${params?.initiative}",
-  "analysis_result": {
-    "probability_employee_achievement": "string (%)",
-    "predict_employee_performance_levels": "High/Medium/Low",
-    "objective_progress_tracking": {
-      "objective_progress": "string (%)",
-      "target_objective": "string (%)",
-      "remaining_time": "0 days",
-      "required_daily_progress": "range 0% - 100%"
+  "employee_info": {
+    "job_title": "string",
+    "performance_objective": "string"
+  },
+  "overall_assessment": {
+    "alignment_score": "number (1-10)",
+    "feasibility_score": "number (1-10)",
+    "completeness_score": "number (1-10)",
+    "overall_rating": "string (Excellent, Good, Fair, Poor)",
+    "summary": "string"
+  },
+  "initiative_analysis": {
+      "initiative": "string",
+      "strengths": ["string", "string"],
+      "weaknesses": ["string", "string"],
+      "alignment_score": "number (1-10)",
+      "feasibility_score": "number (1-10)",
+      "impact_potential": "string (High, Medium, Low)",
+      "specificity_level": "string (High, Medium, Low)",
+      "recommended_action": "string (Keep as-is, Modify, Replace, Add details)",
+      "improvement_suggestions": "string"
     },
-    "initiative_progress_tracking": {
-      "initiative_progress": "string (%)",
-      "target_initiative": "string (%)",
-      "achievement_rate": "range 0% - 100%",
-      "remaining_time": "0 days",
-      "required_daily_progress": "range 0% - 100%",
-    "suggestion": "string",
-    "steps": ["string"],
-    "suggested_competency": [
+  "gap_analysis": {
+    "missing_areas": ["string"],
+    "redundant_initiatives": ["string"],
+    "suggested_additions": [
       {
-        "competency": "string",
-        "description": "string"
+        "initiative": "string",
+        "rationale": "string",
+        "priority": "string (High, Medium, Low)"
       }
     ]
-  }
-}`,
+  },
+  "recommendations": {
+    "prioritization": ["string"],
+    "timeline_suggestions": "string",
+    "resource_considerations": "string",
+    "success_metrics": ["string"],
+    "risk_mitigation": ["string"]
+  },
+  "language": "${params?.config?.language}"
+}
+`,
 });
 
 // User Prompt
