@@ -33,20 +33,6 @@ Example Properties of the JSON schema:
       "achievement_rate": "range 0% - 100%",
       "remaining_time": "0 days",
       "required_daily_progress": "range 0% - 100%",
-      "feedback_analysis": {
-        "overall_sentiment": "Positive/Neutral/Negative",
-        "confidence_score": 0.0,
-        "conclusion": "string",
-        "sentiment_entities": [
-          {
-            "comment": "string",
-            "role": "string",
-            "sentiment": "Positive/Neutral/Negative",
-            "confidence_score": 0.0
-          }
-        ]
-      }
-    },
     "suggestion": "string",
     "steps": ["string"],
     "suggested_competency": [

@@ -39,15 +39,27 @@ const analyzeTask = async (params: any = {}, apiKey?: any) => {
               analysis_result: {
                 type: "object",
                 properties: {
-                  probability_employee_achievement: { type: "string" },
-                  predict_employee_performance_levels: { type: "string" },
-                  objective_progress_tracking: {
+                  job_position: { type: "string" },
+                  job_departmen: { type: "string" },
+                  job_description: { type: "string" },
+                  objective: { type: "string" },
+                  initiative: { type: "string" },
+                  analysis_result: {
+                    type: "object",
+                    properties: {
+                      probability_employee_achievement: { type: "string" },
+                      predict_employee_performance_levels: { type: "string" },
+                      objective_progress_tracking: {
                     type: "object",
                     properties: {
                       objective_progress: { type: "string" },
                       target_objective: { type: "string" },
                       remaining_time: { type: "string" },
                       required_daily_progress: { type: "string" }
+                    },
+                    required: ["objective_progress", "target_objective", "remaining_time", "required_daily_progress"],
+                    additionalProperties: false
+                  },
                     },
                     required: ["objective_progress", "target_objective", "remaining_time", "required_daily_progress"],
                     additionalProperties: false
@@ -60,32 +72,8 @@ const analyzeTask = async (params: any = {}, apiKey?: any) => {
                       achievement_rate: { type: "string" },
                       remaining_time: { type: "string" },
                       required_daily_progress: { type: "string" },
-                      feedback_analysis: {
-                        type: "object",
-                        properties: {
-                          overall_sentiment: { type: "string" },
-                          confidence_score: { type: "number" },
-                          conclusion: { type: "string" },
-                          sentiment_entities: {
-                            type: "array",
-                            items: {
-                              type: "object",
-                              properties: {
-                                comment: { type: "string" },
-                                role: { type: "string" },
-                                sentiment: { type: "string" },
-                                confidence_score: { type: "number" }
-                              },
-                              required: ["comment", "role", "sentiment", "confidence_score"],
-                              additionalProperties: false
-                            }
-                          }
-                        },
-                        required: ["overall_sentiment", "confidence_score", "conclusion", "sentiment_entities"],
-                        additionalProperties: false
-                      }
                     },
-                    required: ["initiative_progress", "target_initiative", "achievement_rate", "remaining_time", "required_daily_progress", "feedback_analysis"],
+                    required: ["initiative_progress", "target_initiative", "achievement_rate", "remaining_time", "required_daily_progress"],
                     additionalProperties: false
                   },
                   suggestion: { type: "string" },
