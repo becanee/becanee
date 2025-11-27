@@ -4,6 +4,7 @@ export async function checkAuthentication(req: NextRequest) {
   const token = req.headers.get('authorization')?.replace('Bearer ', '');
   const scope: any = req.headers.get('x-scope')
   const source: any = req.headers.get('x-source')
+  const source_type: any = req.headers.get('x-source-type')
 
   // Check if req header exists
   if (!token) {
@@ -20,7 +21,7 @@ export async function checkAuthentication(req: NextRequest) {
   }
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_KLOLA_DEV_URL}/auth/me`, {
+    const response = await fetch(`https://${source_type ? source_type : 's'}-${process.env.NEXT_PUBLIC_KLOLA_DEV_URL}/auth/me`, {
       method: 'GET',
       headers: { 
         'x-scope': scope || 'dev',
