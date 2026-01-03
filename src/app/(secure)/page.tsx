@@ -99,7 +99,7 @@ export default async function Page() {
         </div>
       </section>
 
-      <section id="projects">
+      {/* <section id="projects">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>
             <TextAnimate animation="slideLeft" by="character" className="text-xl font-bold tracking-tighter sm:text-xl xl:text-xl/none -mb-4">
@@ -131,27 +131,23 @@ export default async function Page() {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 18}>
           <Terminal className="mb-14">
-            <TypingAnimationTerminal className="px-2">&gt; lets connect with me</TypingAnimationTerminal>
+            <TypingAnimationTerminal className="px-2 mb-5">&gt; lets connect with me</TypingAnimationTerminal>
 
             <AnimatedSpan className="text-green-500 px-4">
-              <span>✔ Whatsapp +44 74 5588 9391</span>
+              <span>✔ Whatsapp <a href="https://wa.me/447445514013" target="_blank" className="italic">+44 744 5514 013</a></span>
             </AnimatedSpan>
 
             <AnimatedSpan className="text-pink-500 px-4">
-              <span>✔ Instagram @becaneee_</span>
+              <span>✔ Instagram <a href="https://www.instagram.com/becaneee_" target="_blank" className="italic">@becaneee_</a></span>
             </AnimatedSpan>
 
-            <AnimatedSpan className="text-gray-500 px-4">
-              <span>✔ Threads @becaneee_</span>
-            </AnimatedSpan>
-
-            <TypingAnimationTerminal className="text-muted-foreground px-2">
-              feel free to ask for crafting new platforms
+            <TypingAnimationTerminal className="text-muted-foreground px-2 mt-5">
+              &gt; feel free to ask for crafting new platforms
             </TypingAnimationTerminal>
           </Terminal>
 

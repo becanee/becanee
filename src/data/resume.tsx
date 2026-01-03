@@ -3,12 +3,12 @@ import { IconBrandCss3, IconBrandGolang, IconBrandGoogle, IconBrandHtml5, IconBr
 import { HomeIcon } from "lucide-react";
 
 export const DATA: any = {
-  name: "ßécanee",
+  name: "ßécaneee",
   initials: "ßé",
   url: "https://becaneee.xyz",
   location: "Jakarta, ID",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
-  description: ["Fullstack Developer", "Freelancer", "n8n Automation"],
+  description: ["Fullstack Developer", "Freelancer", "n8n Automation", "Agentic AI"],
   summary:
     "Hi, I'm ßécanee a freelance developer from Indonesia. I love building things and helping people and work on various projects, from simple websites to complex web apps, and I enjoy the variety of challenges each project offers. When I'm not coding, I'm traveling and exploring the internet, seeking inspiration in every corner.",
   avatarUrl: "/me.jpg",
@@ -170,6 +170,15 @@ export const DATA: any = {
   ],
 
   journey: [
+    {
+      school: "Dibimbing.id",
+      badge: "",
+      href: "https://www.dibimbing.id",
+      degree: "Agentic AI",
+      logoUrl: "/knowladges/dibimbing.png",
+      start: "2025",
+      end: "",
+    },
     {
       school: "Hacktive8",
       badge: "WAVE 4",
